@@ -1,7 +1,8 @@
 import datetime
 import pandas as pd
 import sys
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # type: ignore
+from typing import List
 
 # CI
 efgreen         = "#005953"
@@ -33,7 +34,7 @@ def parse_sponsor_dict(sponsor_dict: dict) -> tuple[int, int, int]:
 
 def split_tuplecol(df: pd.core.frame.DataFrame,
                    incol: str,
-                   outcols: [str]) -> pd.core.frame.DataFrame:
+                   outcols: List[str]) -> pd.core.frame.DataFrame:
     ''' Given a column of tuples, make a set of new columns,
         containing the tuple elements. Drop input column. '''
 

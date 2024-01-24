@@ -171,6 +171,69 @@ For questions, contact @GermanCoyote.'''
                 bbox_inches = "tight")
 
 
+def plot_breakdown(df: pd.core.frame.DataFrame) -> None:
+    nb_normal = df.iloc[-1,:].normal
+    nb_spons  = df.iloc[-1,:].sponsor
+    nb_super  = df.iloc[-1,:].supersponsor
+    
+    s = 20
+    fig, ax = plt.subplots(figsize=(7,7))
+    
+    ax.barh(y     = 0,
+            width = nb_normal,
+            color = eflightergreen,
+            label = "Normal")
+    ax.barh(y     = 0,
+            width = nb_spons,
+            left  = nb_normal,
+            color = eflightgreen,
+            label = "Sponsor")
+    ax.barh(y     = 0,
+            width = nb_super,
+            left  = nb_normal + nb_spons,
+            color = efgreen,
+            label = "Supersponsor")
+    
+    
+    # x axis
+    ax.set_xlabel(xlabel   = "Nb. Regs",
+                  fontsize = s,
+                  labelpad = 10)
+    ax.tick_params(axis      = "x",
+                   which     = "both",
+                   labelsize = s)
+    ax.set_xlim((0,10000))
+ 
+    # y axis
+    ax.set_ylabel(ylabel  = "")
+    ax.set_ylim((-1.5, 1.5))
+    ax.set_yticks([])
+    
+    # Legend
+    ax.legend(loc      = 9,
+              fontsize = 15,
+              ncols    = 2,
+              frameon  = False)
+
+    # Annotations
+    last     = str(df.CurrentDateTimeUtc.tolist()[-1]).split(".")[0]
+    new      = df.new.tolist()[-1]
+    approved = df.approved.tolist()[-1]
+    paid     = df.paid.tolist()[-1]
+    total    = new + approved + paid
+    annot    = \
+f'''Last update {last} (UTC).
+{total} total regs ({nb_normal} normal, {nb_spons} sponsors, {nb_super} supersp).
+For questions, contact @GermanCoyote.'''
+    ax.annotate(text     = annot,
+                xy       = (0.005, 0.005),
+                xycoords = 'figure fraction',
+                fontsize = s/3)
+    # Export
+    plt.savefig(fname       = "../out/Fig2.svg",
+                bbox_inches = "tight")
+
 if __name__ == "__main__":
     x = read_parse_input()
     plot_statuses(x)
+    plot_breakdown(x)

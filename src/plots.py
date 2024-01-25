@@ -85,10 +85,16 @@ def read_parse_input(filename: str = "../data/log.txt") -> pd.core.frame.DataFra
     return df
 
 
-def plot_statuses(df: pd.core.frame.DataFrame) -> None:
+def doubleplot(df: pd.core.frame.DataFrame) -> None:
     s = 20
-    
-    fig, ax = plt.subplots(figsize=(7,7))
+    fig, axes = plt.subplots(nrows = 1, ncols = 2, figsize = (15,7))
+
+    #############
+    # Left plot #
+    #############
+
+    # Plot itself
+    ax = axes.flat[0]
     ax.plot(df.CurrentDateTimeUtc,
             df.paid,
             c      = efgreen,
@@ -166,18 +172,15 @@ For questions, contact @GermanCoyote.'''
                 xycoords = 'figure fraction',
                 fontsize = s/3)
 
-    # Export
-    plt.savefig(fname       = "../out/Fig1.svg",
-                bbox_inches = "tight")
 
+    ##############
+    # Right plot #
+    ##############
 
-def plot_breakdown(df: pd.core.frame.DataFrame) -> None:
+    ax = axes.flat[1]
     nb_normal = df.iloc[-1,:].normal
     nb_spons  = df.iloc[-1,:].sponsor
     nb_super  = df.iloc[-1,:].supersponsor
-    
-    s = 20
-    fig, ax = plt.subplots(figsize=(7,7))
     
     ax.barh(y     = 0,
             width = nb_normal,
@@ -215,25 +218,14 @@ def plot_breakdown(df: pd.core.frame.DataFrame) -> None:
               ncols    = 2,
               frameon  = False)
 
-    # Annotations
-    last     = str(df.CurrentDateTimeUtc.tolist()[-1]).split(".")[0]
-    new      = df.new.tolist()[-1]
-    approved = df.approved.tolist()[-1]
-    paid     = df.paid.tolist()[-1]
-    total    = new + approved + paid
-    annot    = \
-f'''Last update {last} (UTC).
-{total} total regs ({nb_normal} normal, {nb_spons} sponsors, {nb_super} supersp).
-For questions, contact @GermanCoyote.'''
-    ax.annotate(text     = annot,
-                xy       = (0.005, 0.005),
-                xycoords = 'figure fraction',
-                fontsize = s/3)
+
     # Export
-    plt.savefig(fname       = "../out/Fig2.svg",
+    plt.savefig(fname       = "../out/Fig1.svg",
                 bbox_inches = "tight")
+
 
 if __name__ == "__main__":
     x = read_parse_input()
-    plot_statuses(x)
-    plot_breakdown(x)
+    #plot_statuses(x)
+    #plot_breakdown(x)
+    doubleplot(x)

@@ -199,7 +199,7 @@ For questions, contact @GermanCoyote.'''
     
     
     # x axis
-    ax.set_xlabel(xlabel   = "Nb. Regs",
+    ax.set_xlabel(xlabel   = "Count",
                   fontsize = s,
                   labelpad = 10)
     ax.tick_params(axis      = "x",

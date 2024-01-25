@@ -134,7 +134,8 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                         "Jul", "Aug", "Sep"])
     ax.tick_params(axis      = "x",
                    which     = "both",
-                   labelsize = s)
+                   labelsize = s,
+                   pad       = 10)
 
     # y axis
     ax.set_ylabel(ylabel = "Count",
@@ -149,7 +150,8 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
               lw     = 0.5)
     ax.tick_params(axis      = "y",
                    which     = "both",
-                   labelsize = s)
+                   labelsize = s,
+                   pad       = 10)
     
     # Legend
     ax.legend(loc      = 9,
@@ -204,7 +206,8 @@ For questions, contact @GermanCoyote.'''
                   labelpad = 10)
     ax.tick_params(axis      = "x",
                    which     = "both",
-                   labelsize = s)
+                   labelsize = s,
+                   pad       = 10)
     ax.set_xlim((0,10000))
  
     # y axis

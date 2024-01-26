@@ -3,6 +3,9 @@ name: Run Script and Commit
 on:
   schedule:
     - cron: "*/5 * * * *"
+  push:
+    branches:
+      - main
 
 jobs:
   run-script-and-commit:

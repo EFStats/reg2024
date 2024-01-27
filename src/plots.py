@@ -223,12 +223,10 @@ For questions, contact @GermanCoyote.'''
 
 
     # Export
-    plt.savefig(fname       = "../out/Fig1.svg",
+    plt.savefig(fname       = "./out/Fig1.svg",
                 bbox_inches = "tight")
 
 
 if __name__ == "__main__":
     x = read_parse_input()
-    #plot_statuses(x)
-    #plot_breakdown(x)
     doubleplot(x)

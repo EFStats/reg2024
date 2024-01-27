@@ -225,6 +225,7 @@ For questions, contact @GermanCoyote.'''
     # Export
     plt.savefig(fname       = "./out/Fig1.svg",
                 bbox_inches = "tight")
+    print ("Made the plot!")
 
 
 if __name__ == "__main__":

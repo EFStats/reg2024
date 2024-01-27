@@ -26,7 +26,7 @@ def query_endpoint() -> dict:
     return resp.json()
 
 
-def append_to_file(result: dict, filename: str = "../data/log.txt") -> None:
+def append_to_file(result: dict, filename: str = "./data/log.txt") -> None:
     ''' Append a JSON dict to the log file. '''
     try:
         with open(filename, "a") as f:

@@ -50,7 +50,7 @@ def split_tuplecol(df: pd.core.frame.DataFrame,
     return df
 
 
-def read_parse_input(filename: str = "../data/log.txt") -> pd.core.frame.DataFrame:
+def read_parse_input(filename: str = "./data/log.txt") -> pd.core.frame.DataFrame:
     # For now, we only need the time stamp, the total count (for sanity
     # checks), the reg status and the sponsor category column.
     try:

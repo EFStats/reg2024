@@ -159,21 +159,6 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
               ncols    = 3,
               frameon  = False)
     
-    # Annotations
-    last     = str(df.CurrentDateTimeUtc.tolist()[-1]).split(".")[0]
-    new      = df.new.tolist()[-1]
-    approved = df.approved.tolist()[-1]
-    paid     = df.paid.tolist()[-1]
-    total    = new + approved + paid
-    annot    = \
-f'''Last update {last} (UTC).
-{total} total regs ({new} new, {approved} approved, {paid} paid).
-For questions, contact @GermanCoyote.'''
-    ax.annotate(text     = annot,
-                xy       = (0.005, 0.005),
-                xycoords = 'figure fraction',
-                fontsize = s/3)
-
 
     ##############
     # Right plot #
@@ -222,10 +207,41 @@ For questions, contact @GermanCoyote.'''
               frameon  = False)
 
 
+    # Annotations
+    last     = str(df.CurrentDateTimeUtc.tolist()[-1]).split(".")[0]
+ 
+    annot    = \
+f'''Last update {last} (UTC).
+For questions, contact @GermanCoyote.'''
+    ax.annotate(text     = annot,
+                xy       = (0.005, 0.005),
+                xycoords = 'figure fraction',
+                fontsize = s/3)
+
+    new      = df.new.tolist()[-1]
+    approved = df.approved.tolist()[-1]
+    paid     = df.paid.tolist()[-1]
+    total    = new + approved + paid
+    annot    = \
+f'''{total} total regs ({new} new, {approved} approved, {paid} paid).'''
+    axes.flat[0].annotate(text     = annot,
+                          xy       = (0.005, 0.005),
+                          xycoords = 'axes fraction',
+                          fontsize = s/3)
+
+    total    = nb_normal + nb_spons + nb_super
+    annot    = \
+f'''{total} total regs ({nb_normal} normal, {nb_spons} sponsors, {nb_super} supersponsors).'''
+    axes.flat[1].annotate(text     = annot,
+                          xy       = (0.005, 0.005),
+                          xycoords = 'axes fraction',
+                          fontsize = s/3)
+
+
+
     # Export
     plt.savefig(fname       = "./out/Fig1.svg",
                 bbox_inches = "tight")
-    print ("Made the plot!")
 
 
 if __name__ == "__main__":

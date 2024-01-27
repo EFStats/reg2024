@@ -20,8 +20,11 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Execute Script
-      run: pip install matplotlib pandas requests && python scrape.py && python plots.py
+    - name: Setup Python Dependencies
+      run: pip install --upgrade pip && pip install matplotlib pandas requests
+      
+    - name: Execute Scripts
+      run: python ./src/scrape.py && python ./src/plots.py
 
     - name: Commit Changes
       run: |

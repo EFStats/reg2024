@@ -24,6 +24,8 @@ jobs:
       run: pip install --upgrade pip && pip install matplotlib pandas requests
       
     - name: Execute Scripts
+      env:
+        ENDPOINT: ${{ secrets.ENDPOINT }}
       run: python ./src/scrape.py && python ./src/plots.py
 
     - name: Commit Changes

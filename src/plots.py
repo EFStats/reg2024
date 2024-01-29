@@ -119,7 +119,7 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                   fontsize = s,
                   labelpad = 10)
     ax.set_xlim([datetime.date(2024, 1, 1),
-                 datetime.date(2024, 9, 18)])
+                 datetime.date(2024, 3, 1)]) # target: 18th Sept
     ax.set_xticks([datetime.date(2024, 1, 1),
                    datetime.date(2024, 2, 1),
                    datetime.date(2024, 3, 1),

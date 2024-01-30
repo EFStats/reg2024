@@ -36,3 +36,6 @@ jobs:
         git add ./out/Fig1.svg
         timestamp=$(date -u)
         git commit -m "Latest data and plot: ${timestamp}" && git push
+
+    - name: pull on server
+      run: ssh -i key -oStrictHostKeyChecking=no ${{ secrets.USER }}@${{ vars.HOST }} "cd ${{ vars.PATH }} && git fetch --all && git reset --hard origin/main"

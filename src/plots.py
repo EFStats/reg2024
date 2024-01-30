@@ -96,23 +96,23 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
     # Plot itself
     ax = axes.flat[0]
     ax.plot(df.CurrentDateTimeUtc,
+            df.new,
+            c      = eflightergreen,
+            lw     = 2,
+            marker = "",
+            label  = "New")
+    ax.plot(df.CurrentDateTimeUtc,
+            df.approved,
+            c      = eflightgreen,
+            lw     = 2,
+            marker = "",
+            label  = "Approved")
+    ax.plot(df.CurrentDateTimeUtc,
             df.paid,
             c      = efgreen,
             lw     = 2,
             marker = "",
             label  = "Paid")
-    ax.plot(df.CurrentDateTimeUtc,
-            df.approved,
-            c     = eflightgreen,
-            lw    = 2,
-            marker = "",
-            label = "Approved")
-    ax.plot(df.CurrentDateTimeUtc,
-            df.new,
-            c     = eflightergreen,
-            lw    = 2,
-            marker = "",
-            label = "New")
     
     # x axis
     ax.set_xlabel(xlabel   = "Time",

@@ -130,14 +130,14 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                    which     = "both",
                    labelsize = s,
                    pad       = 10)
-    ax.set_xlim([datetime.date(2024, 1, 25),
+    ax.set_xlim([datetime.date(2024, 1, 1),
                  datetime.date(2024, 3, 1)]) # target: 18th Sept
 
     # y axis
     ax.set_ylabel(ylabel = "Count",
                   fontsize = s,
                   labelpad = 10)    
-    ax.set_ylim((-5, 1000))
+    ax.set_ylim((0, 1000))
     ax.hlines(y      = [1000 * i for i in range(50)],
               xmin   = datetime.date(2024, 1, 1),
               xmax   = datetime.date(2024, 9, 18),

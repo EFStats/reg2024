@@ -136,8 +136,8 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
     # y axis
     ax.set_ylabel(ylabel = "Count",
                   fontsize = s,
-                  labelpad = 10)    
-    ax.set_ylim((0, 4000))
+                  labelpad = 10)
+    ax.set_yticks([0, 1000, 2000, 3000, 4000])
     ax.hlines(y      = [1000 * i for i in range(50)],
               xmin   = datetime.date(2024, 1, 1),
               xmax   = datetime.date(2024, 9, 18),
@@ -148,6 +148,7 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                    which     = "both",
                    labelsize = s,
                    pad       = 10)
+    ax.set_ylim((0, 4000))
     
     # Legend
     ax.legend(loc      = 9,

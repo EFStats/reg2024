@@ -17,7 +17,7 @@ def parse_status_dict(status_dict: dict) -> tuple[int, int, int, int]:
 
     new       = status_dict.get("new", 0)
     approved  = status_dict.get("approved", 0)
-    partially = status_dict.get("partially_paid", 0)
+    partially = status_dict.get("partially paid", 0)
     paid      = status_dict.get("paid", 0)
     return (new, approved, partially, paid)
 

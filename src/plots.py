@@ -95,7 +95,7 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
 
     # Plot itself
     ax        = axes.flat[0]
-    df.totals = df.new + df.approved + df.paid
+    df.totals = df.new + df.approved + df.partial + df.paid
     
     ax.plot(df.CurrentDateTimeUtc,
             df.totals,
@@ -217,10 +217,11 @@ For questions, contact @GermanCoyote.'''
 
     new      = df.new.tolist()[-1]
     approved = df.approved.tolist()[-1]
+    partial  = df.partial.tolist()[-1]
     paid     = df.paid.tolist()[-1]
-    total    = new + approved + paid
+    total    = new + approved + partial + paid
     annot    = \
-f'''{total} total regs ({new} new, {approved} approved, {paid} paid).'''
+f'''{total} total regs ({paid} paid).'''
     axes.flat[0].annotate(text     = annot,
                           xy       = (0.005, 0.005),
                           xycoords = 'axes fraction',

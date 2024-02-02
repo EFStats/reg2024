@@ -114,24 +114,31 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
     ax.set_xlabel(xlabel   = "Time",
                   fontsize = s,
                   labelpad = 10)
-    ax.set_xticks([datetime.date(2024, 1, 1),
-                   datetime.date(2024, 2, 1),
-                   datetime.date(2024, 3, 1),
-                   datetime.date(2024, 4, 1),
-                   datetime.date(2024, 5, 1),
-                   datetime.date(2024, 6, 1),
-                   datetime.date(2024, 7, 1),
-                   datetime.date(2024, 8, 1),
-                   datetime.date(2024, 9, 1)])
-    ax.set_xticklabels(["Jan", "Feb", "Mar",
-                        "Apr", "May", "Jun",
-                        "Jul", "Aug", "Sep"])
+    #ax.set_xticks([datetime.date(2024, 1, 1),
+    #               datetime.date(2024, 2, 1),
+    #               datetime.date(2024, 3, 1),
+    #               datetime.date(2024, 4, 1),
+    #               datetime.date(2024, 5, 1),
+    #               datetime.date(2024, 6, 1),
+    #               datetime.date(2024, 7, 1),
+    #               datetime.date(2024, 8, 1),
+    #               datetime.date(2024, 9, 1)])
+    #ax.set_xticklabels(["Jan", "Feb", "Mar",
+    #                    "Apr", "May", "Jun",
+    #                    "Jul", "Aug", "Sep"])
+   
+    ax.set_xticks([datetime.date(2024, 1, 20)
+                  datetime.date(2024, 2, 1),
+                  datetime.date(2024, 2, 10)])
+    ax.set_xticklabels(["20 Jan", "1 Feb", "10 Feb"])
+
     ax.tick_params(axis      = "x",
                    which     = "both",
                    labelsize = s,
                    pad       = 10)
-    ax.set_xlim([datetime.date(2024, 1, 1),
-                 datetime.date(2024, 3, 1)]) # target: 18th Sept
+    
+    ax.set_xlim([datetime.date(2024, 1, 20),
+                 datetime.date(2024, 2, 10)]) # target: 18th Sept
 
     # y axis
     ax.set_ylabel(ylabel = "Count",

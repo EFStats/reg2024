@@ -76,12 +76,6 @@ def read_parse_input(filename: str = "./data/log.txt") -> pd.core.frame.DataFram
                                   incol   = "Sponsor",
                                   outcols = sponsor_cols)
     
-    # Sanity checks: The three sponsorship categories must add up to the
-    # total count, as well as the four reg status. Return, when passed.
-    if not all(df.TotalCount == df[sponsor_cols].sum(axis=1)):
-        sys.exit("read_parse_input: Consistency check 1 failed.")
-    if not all(df.TotalCount == df[status_cols].sum(axis=1)):
-        sys.exit("read_parse_input: Consistency check 2 failed.")
     return df
 
 

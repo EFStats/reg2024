@@ -2,6 +2,7 @@ import datetime
 import pandas as pd
 import sys
 import matplotlib.pyplot as plt  # type: ignore
+import numpy as np
 from typing import List
 
 # CI

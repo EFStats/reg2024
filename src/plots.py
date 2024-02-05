@@ -150,8 +150,8 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                    labelsize = s,
                    pad       = 10)
     
-    ax.set_xlim([datetime.date(2024, 1, 20),
-                 datetime.date(2024, 2, 10)]) # target: 18th Sept
+    ax.set_xlim([datetime.date(2024, 1, 25),
+                 datetime.date(2024, 2, 15)]) # target: 18th Sept
 
     # y axis
     ax.set_ylabel(ylabel = "Count",

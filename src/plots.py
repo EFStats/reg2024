@@ -129,11 +129,10 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                   fontsize = s,
                   labelpad = 10)
     
-    ax.set_xticks([datetime.date(2024, 1, 25),
-                  datetime.date(2024, 2, 1),
+    ax.set_xticks([datetime.date(2024, 2, 1),
                   datetime.date(2024, 3, 1),
                   datetime.date(2024, 4, 1)])
-    ax.set_xticklabels(["25 Jan", "1 Feb", "1 Mar", "1 Apr"])
+    ax.set_xticklabels(["1 Feb", "1 Mar", "1 Apr"])
 
     ax.tick_params(axis      = "x",
                    which     = "both",

@@ -245,7 +245,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     ax.plot(df_last_daywise.idx,
             df_last_daywise.total,
             lw    = 2,
-            c     = eflightergreen,
+            c     = eflightgreen,
             label = "2023")
     ax.vlines([230], 0, 10000, color = "grey", ls=":", label = "EF 2024 Begins")
 

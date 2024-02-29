@@ -80,17 +80,48 @@ def read_parse_input(filename: str = "./data/log.txt") -> pd.core.frame.DataFram
     return df
 
 
-def doubleplot(df: pd.core.frame.DataFrame) -> None:
+def read_old_dashboard(filename: str = "./data/dashboard_per_28082023.csv") -> pd.core.frame.DataFrame:
+    df_23 = pd.read_csv(filename)
+    df_23.columns = ["idx", "date", "total", "unapproved", "approved", "partially_paid", "paid"]
+    df_23.date = [x[:10] for x in df_23.date]
+    df_23.date = pd.to_datetime(df_23.date) + pd.DateOffset(1)
+    df_23.idx -= 4
+    return df_23
+    
+
+def daywise(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+    ''' Calculate day-wise count'''
+
+    # Working copy
+    out          = df.copy()
+
+    # Get last count for every day
+    out["Date"]  = pd.to_datetime(df['CurrentDateTimeUtc']).dt.strftime('%m/%d/%Y')
+    out          = out.groupby("Date").agg("last").reset_index()
+    out          = out.loc[:, ["Date", "TotalCount"]]
+    
+    # Add day index, shifted by offset of three,
+    # s.t. day 0 is the day of reg opening
+    out["idx"] = np.arange(0, len(out)) - 3
+
+    return out
+
+
+def tripleplot(df: pd.core.frame.DataFrame,
+               df_last_daywise: pd.core.frame.DataFrame) -> None:
+        
+    # Prepare figure
     s = 20
-    fig, axes = plt.subplots(nrows = 1, ncols = 2, figsize = (15,7))
+    fig, axes = plt.subplots(nrows = 2, ncols = 2, figsize = (15,15))
+    plt.subplots_adjust(hspace = .3)
+    axes.flat[3].set_visible(False)
 
     #############
     # Left plot #
     #############
 
-    # Plot itself
-    ax        = axes.flat[0]
-    df.totals = df.new + df.approved + df.partial + df.paid
+    ax           = axes.flat[0]
+    df["totals"] = df.new + df.approved + df.partial + df.paid
     
     ax.plot(df.CurrentDateTimeUtc,
             df.totals,
@@ -127,7 +158,7 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
     ax.set_ylabel(ylabel = "Count",
                   fontsize = s,
                   labelpad = 10)
-    ax.set_yticks([0, 1000, 2000, 3000, 4000])
+    ax.set_yticks([0, 1000, 2000, 3000, 4000, 5000])
     ax.hlines(y      = [1000 * i for i in range(50)],
               xmin   = datetime.date(2024, 1, 1),
               xmax   = datetime.date(2024, 9, 18),
@@ -138,7 +169,7 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                    which     = "both",
                    labelsize = s,
                    pad       = 10)
-    ax.set_ylim((0, 4000))
+    ax.set_ylim((0, 5000))
     
     # Legend
     ax.legend(loc      = 9,
@@ -180,7 +211,7 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
                    which     = "both",
                    labelsize = s,
                    pad       = 10)
-    ax.set_xlim((0,4000))
+    ax.set_xlim((0,5000))
  
     # y axis
     ax.set_ylabel(ylabel  = "")
@@ -192,9 +223,66 @@ def doubleplot(df: pd.core.frame.DataFrame) -> None:
               fontsize = 15,
               ncols    = 2,
               frameon  = False)
+    
+    
+    ####################
+    # Bottom-left plot #
+    ####################
+        
+    # We need daywise data for the bottom-left plot.
+    # This year, the data from the last con (2023) is only
+    # availably on a daywise basis, so we don't need to
+    # preprocess those.
+    df_daywise = daywise(df)
+    
+    ax = axes.flat[2]
+    ax.plot(df_daywise.idx,
+            df_daywise.TotalCount,
+            lw     = 2,
+            c      = efgreen,
+            label  = "2024",
+            zorder = 100)
+    ax.plot(df_last_daywise.idx,
+            df_last_daywise.total,
+            lw    = 2,
+            c     = eflightergreen,
+            label = "2023")
+    ax.vlines([230], 0, 10000, color = "grey", ls=":", label = "EF 2024 Begins")
+
+    
+    # x axis
+    ax.set_xlabel(xlabel   = "Day After Reg Opening",
+                  fontsize = s,
+                  labelpad = 10)
+    ax.tick_params(axis      = "x",
+                   which     = "both",
+                   labelsize = s,
+                   pad       = 10)
+    ax.set_xlim((-5, 250))
+ 
+    # y axis
+    ax.set_ylabel(ylabel  = "Total Regs",
+                 fontsize = s,
+                 labelpad = 10)
+    ax.tick_params(axis      = "y",
+                   which     = "both",
+                   labelsize = s,
+                   pad       = 10)
+    ax.set_ylim((0, 5000))
+    
+    # Legend
+    ax.legend(loc      = 2,
+              fontsize = s,
+              ncols    = 1,
+              frameon  = False)
 
 
-    # Annotations
+
+    
+    ###############
+    # Annotations #
+    ###############
+    
     last     = str(df.CurrentDateTimeUtc.tolist()[-1]).split(".")[0]
  
     annot    = \
@@ -233,5 +321,14 @@ f'''{total} total regs ({nb_normal} normal, {nb_spons} sponsors, {nb_super} supe
 
 
 if __name__ == "__main__":
-    x = read_parse_input()
-    doubleplot(x)
+    # This year's data, from our own logger
+    ef2024         = read_parse_input()
+    
+    # Last year's data is only available on a daily basis,
+    # which is why we have two different read-functions.
+    # This is a bit inelegant, but starting next year,
+    # all logs will be in the same format, and the code
+    # will become less cluttered.
+    ef2023_daywise = read_old_dashboard()
+    
+    tripleplot(ef2024, ef2023_daywise)

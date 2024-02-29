@@ -272,7 +272,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     
     # Legend
     ax.legend(loc      = 2,
-              fontsize = s,
+              fontsize = 15,
               ncols    = 1,
               frameon  = False)
 

@@ -80,25 +80,6 @@ def read_parse_input(filename: str = "./data/log.txt") -> pd.core.frame.DataFram
     return df
 
 
-# Currently unused, but will be used later for modelling.
-def calc_diffs(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
-    ''' Calculate day-wise differences in total count'''
-
-    # Working copy
-    out          = df.copy()
-
-    # Get last count for every day
-    out["Date"]  = pd.to_datetime(df['CurrentDateTimeUtc']).dt.strftime('%m/%d/%Y')
-    out          = out.groupby("Date").agg("last").reset_index()
-    out          = out.loc[:, ["Date", "TotalCount"]]
-
-    # Calculate day-wise difference, and return
-    diffs        = np.array(out.TotalCount[1:]) - np.array(out.TotalCount[:-1])
-    diffs        = [out.TotalCount[0]] + list(diffs)
-    out["Delta"] = diffs
-    return out
-
-
 def doubleplot(df: pd.core.frame.DataFrame) -> None:
     s = 20
     fig, axes = plt.subplots(nrows = 1, ncols = 2, figsize = (15,7))

@@ -130,11 +130,11 @@ def tripleplot(df: pd.core.frame.DataFrame,
             marker = "",
             label  = "Total")
     ax.plot(df.CurrentDateTimeUtc,
-            df.paid,
+            df.paid + df.partial,
             c      = eflightgreen,
             lw     = 2,
             marker = "",
-            label  = "Paid")
+            label  = "Paid (incl. partial)")
 
     # x axis
     ax.set_xlabel(xlabel   = "Time",

@@ -299,7 +299,7 @@ For questions, contact @GermanCoyote.'''
     paid     = df.paid.tolist()[-1]
     total    = new + approved + partial + paid
     annot    = \
-f'''{total} total regs ({paid} paid).'''
+f'''{total} total regs ({partial + paid} paid).'''
     axes.flat[0].annotate(text     = annot,
                           xy       = (0.005, 0.005),
                           xycoords = 'axes fraction',

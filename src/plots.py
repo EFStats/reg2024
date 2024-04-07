@@ -303,7 +303,7 @@ For questions, contact @GermanCoyote.'''
     annot    = \
 f'''{total} total regs ({partial + paid} paid).'''
     axes.flat[0].annotate(text     = annot,
-                          xy       = (0.005, 0.005),
+                          xy       = (3*0.005, 0.005),
                           xycoords = 'axes fraction',
                           fontsize = s/3)
 
@@ -311,7 +311,7 @@ f'''{total} total regs ({partial + paid} paid).'''
     annot    = \
 f'''{total} total regs ({nb_normal} normal, {nb_spons} sponsors, {nb_super} supersponsors).'''
     axes.flat[1].annotate(text     = annot,
-                          xy       = (0.005, 0.005),
+                          xy       = (3*0.005, 0.005),
                           xycoords = 'axes fraction',
                           fontsize = s/3)
 

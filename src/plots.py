@@ -146,7 +146,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
                   datetime.date(2024, 4, 1),
                   datetime.date(2024, 5, 1),
                   datetime.date(2024, 6, 1)])
-    ax.set_xticklabels(["1 Feb", "1 Mar", "1 Apr", "1 May", "1 Jun"])
+    ax.set_xticklabels(["Feb", "Mar", "Apr", "May", "Jun"])
 
     ax.tick_params(axis      = "x",
                    which     = "both",

@@ -147,8 +147,9 @@ def tripleplot(df: pd.core.frame.DataFrame,
                   datetime.date(2024, 5, 1),
                   datetime.date(2024, 6, 1),
                   datetime.date(2024, 7, 1),
-                  datetime.date(2024, 8, 1)])
-    ax.set_xticklabels(["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"])
+                  datetime.date(2024, 8, 1),
+                  datetime.date(2024, 9, 1)])
+    ax.set_xticklabels(["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"])
 
     ax.tick_params(axis      = "x",
                    which     = "both",
@@ -156,7 +157,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    pad       = 10)
     
     ax.set_xlim([datetime.date(2024, 1, 25),
-                 datetime.date(2024, 8, 1)]) # target: 18th Sept (2024, 9, 18)
+                 datetime.date(2024, 9, 18)]) # target: 18th Sept (2024, 9, 18)
 
     # y axis
     ax.set_ylabel(ylabel = "Count",

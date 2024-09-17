@@ -305,17 +305,19 @@ For questions, contact @GermanCoyote.'''
                 xycoords = 'figure fraction',
                 fontsize = s/3)
 
-    new      = df.new.tolist()[-1]
-    approved = df.approved.tolist()[-1]
-    partial  = df.partial.tolist()[-1]
-    paid     = df.paid.tolist()[-1]
-    total    = new + approved + partial + paid
-    annot    = \
-f'''{total} total regs ({partial + paid} paid).'''
+    new       = df.new.tolist()[-1]
+    approved  = df.approved.tolist()[-1]
+    partial   = df.partial.tolist()[-1]
+    paid      = df.paid.tolist()[-1]
+    checkedin = df.checkedin.tolist()[-1]
+    total     = new + approved + partial + paid + checkedin
+    annot     = \
+f'''{total} total regs ({partial + paid + checkedin} paid, out of which {checkedin} checked in).'''
     axes.flat[0].annotate(text     = annot,
                           xy       = (0.005, 0.005),
                           xycoords = 'axes fraction',
                           fontsize = s/3)
+
 
     total    = nb_normal + nb_spons + nb_super
     annot    = \

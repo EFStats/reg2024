@@ -20,7 +20,8 @@ def parse_status_dict(status_dict: dict) -> tuple[int, int, int, int]:
     approved  = status_dict.get("approved", 0)
     partially = status_dict.get("partially paid", 0)
     paid      = status_dict.get("paid", 0)
-    return (new, approved, partially, paid)
+    checkedin = status_dict.get("checked in", 0)
+    return (new, approved, partially, paid, checkedin)
 
 
 def parse_sponsor_dict(sponsor_dict: dict) -> tuple[int, int, int]:
@@ -68,7 +69,7 @@ def read_parse_input(filename: str = "./data/log.txt") -> pd.core.frame.DataFram
     df.Sponsor = df.Sponsor.apply(parse_sponsor_dict)
     
     # Turn the two tuple columns into sets of individual columns.
-    status_cols  = ["new", "approved", "partial", "paid"]
+    status_cols  = ["new", "approved", "partial", "paid", "checkedin"]
     sponsor_cols = ["normal", "sponsor", "supersponsor"]
     df           = split_tuplecol(df      = df,
                                   incol   = "Status",
@@ -124,14 +125,20 @@ def tripleplot(df: pd.core.frame.DataFrame,
     df["totals"] = df.new + df.approved + df.partial + df.paid
     
     ax.plot(df.CurrentDateTimeUtc,
-            df.totals,
+            df.checkedin,
             c      = efgreen,
+            lw     = 2,
+            marker = "",
+            label  = "Checked in")
+    ax.plot(df.CurrentDateTimeUtc,
+            df.totals,
+            c      = eflightgreen,
             lw     = 2,
             marker = "",
             label  = "Total")
     ax.plot(df.CurrentDateTimeUtc,
             df.paid + df.partial,
-            c      = eflightgreen,
+            c      = eflightergreen,
             lw     = 2,
             marker = "",
             label  = "Paid (incl. partial)")

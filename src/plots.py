@@ -122,7 +122,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     #############
 
     ax           = axes.flat[0]
-    df["totals"] = df.new + df.approved + df.partial + df.paid
+    df["totals"] = df.new + df.approved + df.partial + df.paid + df.checkedin
     
     ax.plot(df.CurrentDateTimeUtc,
             df.checkedin,
@@ -137,7 +137,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
             marker = "",
             label  = "Total")
     ax.plot(df.CurrentDateTimeUtc,
-            df.paid + df.partial,
+            df.paid + df.partial + df.checkedin,
             c      = eflightergreen,
             lw     = 2,
             marker = "",

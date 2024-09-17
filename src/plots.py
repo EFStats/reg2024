@@ -164,7 +164,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    pad       = 10)
     
     ax.set_xlim([datetime.date(2024, 1, 25),
-                 datetime.date(2024, 9, 18)]) # target: 18th Sept (2024, 9, 18)
+                 datetime.date(2024, 9, 25)]) # target: 18th Sept (2024, 9, 18)
 
     # y axis
     ax.set_ylabel(ylabel = "Count",
@@ -186,7 +186,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     # Legend
     ax.legend(loc      = 9,
               fontsize = 15,
-              ncols    = 3,
+              ncols    = 2,
               frameon  = False)
     
 

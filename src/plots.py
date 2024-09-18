@@ -318,8 +318,8 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    labelsize = s,
                    pad       = 10)
     
-    ax.set_xlim([datetime.date(2024, 9, 16),
-                 datetime.date(2024, 9, 22)]) # target: 18th Sept (2024, 9, 18)
+    ax.set_xlim([datetime.date(2024, 9, 17),
+                 datetime.date(2024, 9, 21)])
 
     # y axis
     ax.set_ylabel(ylabel = "Checked In",

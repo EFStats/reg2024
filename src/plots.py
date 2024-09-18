@@ -114,7 +114,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     # Prepare figure
     s = 20
     fig, axes = plt.subplots(nrows = 2, ncols = 2, figsize = (15,15))
-    plt.subplots_adjust(hspace = .3, vspace=.3)
+    plt.subplots_adjust(hspace = .3, wspace=.3)
     #axes.flat[3].set_visible(False)
 
     #############

@@ -114,7 +114,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     # Prepare figure
     s = 20
     fig, axes = plt.subplots(nrows = 2, ncols = 2, figsize = (15,15))
-    plt.subplots_adjust(hspace = .6)
+    plt.subplots_adjust(hspace = .3, vspace=.3)
     #axes.flat[3].set_visible(False)
 
     #############
@@ -302,18 +302,16 @@ def tripleplot(df: pd.core.frame.DataFrame,
             label  = "Checked in")
 
     # x axis
-    ax.set_xlabel(xlabel   = "Time",
+    ax.set_xlabel(xlabel   = "Date",
                   fontsize = s,
                   labelpad = 10)
     
-    ax.set_xticks([datetime.date(2024, 9, 16),
-                  datetime.date(2024, 9, 17),
+    ax.set_xticks([datetime.date(2024, 9, 17),
                   datetime.date(2024, 9, 18),
                   datetime.date(2024, 9, 19),
                   datetime.date(2024, 9, 20),
-                  datetime.date(2024, 9, 21),
-                  datetime.date(2024, 9, 22)])
-    ax.set_xticklabels(["16th", "17th", "18th", "19th", "20th", "21st", "22nd"])
+                  datetime.date(2024, 9, 21)])
+    ax.set_xticklabels(["17th", "18th", "19th", "20th", "21st"])
 
     ax.tick_params(axis      = "x",
                    which     = "both",

@@ -319,7 +319,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    pad       = 10)
     
     ax.set_xlim([datetime.date(2024, 9, 17),
-                 datetime.date(2024, 9, 21)])
+                 datetime.date(2024, 9, 23)])
 
     # y axis
     ax.set_ylabel(ylabel = "Checked In",
@@ -328,7 +328,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
     ax.set_yticks([0, 1000, 2000, 3000, 4000, 5000, 6000])
     ax.hlines(y      = [1000 * i for i in range(50)],
               xmin   = datetime.date(2024, 9, 16),
-              xmax   = datetime.date(2024, 9, 22),
+              xmax   = datetime.date(2024, 9, 23),
               colors = "lightgrey",
               ls     = "-",
               lw     = 0.5)

@@ -349,6 +349,9 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    labelsize = s,
                    pad       = 10)
     ax2.set_ylim([0, 12])
+    ax.yaxis.label.set_color('red')
+    ax2.spines['right'].set_color('C0')
+    ax2.tick_params(axis='y', colors='C0')
 
     df.delta_checkins = df.checkedin.rolling(window=2).apply(lambda x: x.iloc[1] - x.iloc[0])
     df.delta_min      = df.CurrentDateTimeUtc.astype(int).rolling(window=2).apply(lambda x: x.iloc[1] - x.iloc[0]) / 1e9 / 60
@@ -358,8 +361,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
             c      = "C0",
             lw     = 2,
             marker = "")
-    ax2.spines['right'].set_color('C0')
-    ax2.tick_params(axis='y', colors='C0')
+
 
                    
 

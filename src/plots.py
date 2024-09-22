@@ -349,7 +349,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    labelsize = s,
                    pad       = 10)
     ax2.set_ylim([0, 12])
-    ax2.yaxis.label.set_color('red')
+    ax2.yaxis.label.set_color('C0')
     ax2.spines['right'].set_color('C0')
     ax2.tick_params(axis='y', colors='C0')
 

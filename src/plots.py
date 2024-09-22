@@ -348,6 +348,7 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    which     = "both",
                    labelsize = s,
                    pad       = 10)
+    ax2.set_ylim([0, 12])
 
     df.delta_checkins = df.checkedin.rolling(window=2).apply(lambda x: x.iloc[1] - x.iloc[0])
     df.delta_min      = df.CurrentDateTimeUtc.astype(int).rolling(window=2).apply(lambda x: x.iloc[1] - x.iloc[0]) / 1e9 / 60

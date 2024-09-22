@@ -338,6 +338,24 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    labelsize = s,
                    pad       = 10)
     ax.set_ylim((0, 6000))
+
+    # Another y axis
+    ax2 = ax.twinx()
+    ax2.set_ylabel(ylabel = "Check-In Rate [Regs / min]",
+                  fontsize = s,
+                  labelpad = 10)
+    ax2.tick_params(axis      = "y",
+                   which     = "both",
+                   labelsize = s,
+                   pad       = 10)
+
+    df.checkinrate = df.checkedin.rolling(window=2).apply(lambda x: x.iloc[1] - x.iloc[0])
+    ax2.plot(df.CurrentDateTimeUtc,
+            df.checkinrate,
+            c      = efgreen,
+            lw     = 2,
+            marker = "")
+
                    
 
     

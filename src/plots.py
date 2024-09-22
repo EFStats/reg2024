@@ -349,8 +349,8 @@ def tripleplot(df: pd.core.frame.DataFrame,
                    labelsize = s,
                    pad       = 10)
 
-    df.delta_checkins = df.checkedin.rolling(window=1).apply(lambda x: x.iloc[1] - x.iloc[0])
-    df.delta_t        = df.CurrentDateTimeUtc.rolling(window=1).apply(lambda x: pd.Timedelta(x.iloc[1] - x.iloc[0]).seconds / 60.0)
+    df.delta_checkins = df.checkedin.rolling(window=2).apply(lambda x: x.iloc[1] - x.iloc[0])
+    df.delta_t        = df.CurrentDateTimeUtc.rolling(window=2).apply(lambda x: pd.Timedelta(x.iloc[1] - x.iloc[0]).seconds / 60.0)
     df.checkinrate    = df.delta_checkins / df.delta_t
     ax2.plot(df.CurrentDateTimeUtc,
             df.checkinrate,
